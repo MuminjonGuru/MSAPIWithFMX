@@ -1,0 +1,276 @@
+inherited NewFormFrame: TNewFormFrame
+  Size.Width = 387.000000000000000000
+  Size.Height = 753.000000000000000000
+  inherited MainLayout: TGridPanelLayout
+    Size.Width = 387.000000000000000000
+    Size.Height = 753.000000000000000000
+    ControlCollection = <
+      item
+        Column = 0
+        Control = HeaderRect
+        Row = 0
+      end
+      item
+        Column = 0
+        Control = TabControl1
+        Row = 1
+      end>
+    inherited HeaderRect: TRectangle
+      Size.Width = 387.000000000000000000
+      Size.Height = 49.226009368896490000
+      inherited CaptionLbl: TLabel
+        Size.Width = 307.000000000000000000
+        Size.Height = 46.226009368896490000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        Text = 'SerpStack + FMX'
+        inherited HamburgerImg: TPath
+          Size.Height = 29.226009368896490000
+          inherited HitBox: TLayout
+            Size.Height = 35.226009368896490000
+          end
+        end
+      end
+      object Button1: TButton
+        Align = MostRight
+        StyledSettings = [Family, Style, FontColor]
+        Position.X = 307.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 49.226009368896490000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Fetch'
+        TextSettings.Font.Size = 16.000000000000000000
+        OnClick = Button1Click
+      end
+    end
+    object TabControl1: TTabControl
+      Align = Client
+      Size.Width = 387.000000000000000000
+      Size.Height = 703.773986816406300000
+      Size.PlatformDefault = False
+      TabIndex = 0
+      TabOrder = 0
+      TabPosition = PlatformDefault
+      Sizes = (
+        387s
+        677.773986816406s
+        387s
+        677.773986816406s)
+      object TabItem1: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 76.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Currencies'
+        ExplicitSize.cx = 76.000000000000000000
+        ExplicitSize.cy = 26.000000000000000000
+        object ListView1: TListView
+          ItemAppearanceClassName = 'TListItemRightDetailAppearance'
+          ItemEditAppearanceClassName = 'TListItemRightDetailDeleteAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Align = Client
+          Size.Width = 387.000000000000000000
+          Size.Height = 677.773986816406300000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          ParentShowHint = False
+          ShowHint = False
+          ItemAppearanceObjects.HeaderObjects.Text.Font.Size = 14.000000000000000000
+          ItemAppearanceObjects.FooterObjects.Text.Font.Size = 14.000000000000000000
+          SearchVisible = True
+        end
+      end
+      object TabItem2: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 76.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Exchanges'
+        ExplicitSize.cx = 76.000000000000000000
+        ExplicitSize.cy = 26.000000000000000000
+        object StringGridPrototypeBindSource1: TStringGrid
+          Align = Client
+          CanFocus = True
+          ClipChildren = True
+          Size.Width = 387.000000000000000000
+          Size.Height = 652.773986816406300000
+          Size.PlatformDefault = False
+          StyleLookup = 'gridstyle'
+          TabOrder = 0
+          RowCount = 0
+          Viewport.Width = 387.000000000000000000
+          Viewport.Height = 652.800000000000000000
+        end
+        object NavigatorPrototypeBindSource1: TBindNavigator
+          Align = Top
+          Size.Width = 387.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          xRadius = 4.000000000000000000
+          yRadius = 4.000000000000000000
+        end
+      end
+    end
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 
+      'http://api.marketstack.com/v1/exchanges?access_key=e0f65ac7d5205' +
+      '9267fd89eb62639792f'
+    Params = <>
+    Left = 248
+    Top = 128
+  end
+  object RESTRequest1: TRESTRequest
+    AssignedValues = [rvConnectTimeout, rvReadTimeout]
+    Client = RESTClient1
+    Params = <>
+    Response = RESTResponse1
+    Left = 88
+    Top = 192
+  end
+  object RESTResponse1: TRESTResponse
+    RootElement = 'data'
+    Left = 248
+    Top = 192
+  end
+  object RESTResponseDataSetAdapter1: TRESTResponseDataSetAdapter
+    Dataset = FDMemTable1
+    FieldDefs = <>
+    Response = RESTResponse1
+    NestedElements = True
+    Left = 88
+    Top = 128
+  end
+  object FDMemTable1: TFDMemTable
+    FieldDefs = <>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    StoreDefs = True
+    Left = 256
+    Top = 264
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 68
+    Top = 261
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = StringGridPrototypeBindSource1
+      Columns = <>
+    end
+    object LinkFillControlToField1: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = ListView1
+      Track = True
+      FillDataSource = BindSourceDB2
+      FillDisplayFieldName = 'code'
+      AutoFill = True
+      FillExpressions = <
+        item
+          SourceMemberName = 'name'
+          ControlMemberName = 'Detail'
+        end>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'symbol'
+      FillBreakGroups = <>
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = FDMemTable1
+    ScopeMappings = <>
+    Left = 168
+    Top = 256
+  end
+  object RESTClient2: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 
+      'http://api.marketstack.com/v1/currencies?access_key=e0f65ac7d520' +
+      '59267fd89eb62639792f'
+    Params = <>
+    Left = 312
+    Top = 400
+  end
+  object RESTRequest2: TRESTRequest
+    AssignedValues = [rvConnectTimeout, rvReadTimeout]
+    Client = RESTClient2
+    Params = <>
+    Response = RESTResponse2
+    Left = 144
+    Top = 360
+  end
+  object RESTResponse2: TRESTResponse
+    ContentType = 'application/json'
+    RootElement = 'data'
+    Left = 152
+    Top = 456
+  end
+  object RESTResponseDataSetAdapter2: TRESTResponseDataSetAdapter
+    Active = True
+    Dataset = FDMemTable2
+    FieldDefs = <>
+    Response = RESTResponse2
+    Left = 200
+    Top = 400
+  end
+  object FDMemTable2: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'code'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'symbol'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'name'
+        DataType = ftWideString
+        Size = 255
+      end>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    StoreDefs = True
+    Left = 248
+    Top = 456
+  end
+  object BindSourceDB2: TBindSourceDB
+    DataSet = FDMemTable2
+    ScopeMappings = <>
+    Left = 264
+    Top = 360
+  end
+end

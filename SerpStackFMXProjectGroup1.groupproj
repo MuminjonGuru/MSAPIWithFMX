@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{395F6A40-1ED0-4463-A3FD-84167DC2FE8E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Test\MarketStackFMX_tests.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MarketStackFMX.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="MarketStackFMX_tests">
+        <MSBuild Projects="Test\MarketStackFMX_tests.dproj"/>
+    </Target>
+    <Target Name="MarketStackFMX_tests:Clean">
+        <MSBuild Projects="Test\MarketStackFMX_tests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MarketStackFMX_tests:Make">
+        <MSBuild Projects="Test\MarketStackFMX_tests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MarketStackFMX">
+        <MSBuild Projects="MarketStackFMX.dproj"/>
+    </Target>
+    <Target Name="MarketStackFMX:Clean">
+        <MSBuild Projects="MarketStackFMX.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MarketStackFMX:Make">
+        <MSBuild Projects="MarketStackFMX.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="MarketStackFMX_tests;MarketStackFMX"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="MarketStackFMX_tests:Clean;MarketStackFMX:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="MarketStackFMX_tests:Make;MarketStackFMX:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
